@@ -10,7 +10,11 @@ any '/' => sub {
 
     $self->stash( ip => $ip, pid => $$ );
 } => 'index';
-
+get '/:foo' => sub {
+    my $self = shift;
+    my $foo  = $self->param('foo');
+    $self->render(text => "Hello from $foo.");
+  };
 app->start;
 
 __DATA__
